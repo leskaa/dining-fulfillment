@@ -7,9 +7,25 @@ from bs4 import BeautifulSoup
 # Class scrape to get json data from 'Menus on the Web' pages
 class Foodscraper:
 
-    # url - url of page to be scraped
-    def __init__(self, url):
-        self.url = url
+    # date - (string) in YYYY-MM-DD format
+    # diningCenter - (string) 'residence' or 'union' or 'west'
+    def __init__(self, date, diningCenter):
+        if diningCenter == 'residence' or diningCenter == 4:
+            locationNum = '04'
+            locationName = 'Residence+Dining+Center'
+        elif diningCenter == 'union' or diningCenter == 10:
+            locationNum = '10'
+            locationName = 'Union+Dining+Center'
+        elif diningCenter == 'west' or diningCenter == 2:
+            locationNum = '02'
+            locationName = 'West+Dining+Center'
+        month = str(date[5:-3])
+        day = str(date[-2:])
+        year = str(date[:4])
+        self.url = 'https://www.ndsu.edu/dining/menu/shortmenu.asp?sName=MENUS+ON+THE+WEB&locationNum=' + locationNum + \
+            '&locationName=' + locationName + \
+            '&naFlag=1&WeeksMenus=This+Week%27s+Menus&myaction=read&dtdate=' + \
+            month + '%2F' + day + '%2F' + year
 
     # filepath - location to save json file of data
     # filename - name of saved file
