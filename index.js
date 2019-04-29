@@ -1,8 +1,33 @@
+const express = require('express');
+const bodyParser = require('body-parser');
+
+const { Client } = require('pg');
+
 const axios = require('axios');
 const cheerio = require('cheerio');
 
-// Test function call
-parseDay(new Date());
+const { dialogflow, Table } = require('actions-on-google');
+
+const app = dialogflow();
+
+const client = new Client({
+  connectionString: process.env.DATABASE_URL,
+  ssl: true
+});
+
+client.connect();
+
+app.intent('Default Welcome Intent', conv => {
+  conv.ask('Hi, What would you like to know about the NDSU Dining Centers?');
+});
+
+app.intent('Default Fallback Intent', conv => {
+  conv.ask(`I couldn't understand. Can you say that again?`);
+});
+
+app.intent('Get Hours Intent', (conv, params) => {
+  conv.close(`Here is the information for ${params.Meal}`);
+});
 
 function parseDay(date) {
   let month = date.getMonth() + 1;
@@ -48,3 +73,9 @@ function parsePage(pageUrl) {
   })
   .catch(console.error());
 }
+
+const expressApp = express().use(bodyParser.json());
+
+expressApp.post('/fulfillment', app);
+
+expressApp.listen(3000);
