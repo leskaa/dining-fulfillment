@@ -17,8 +17,8 @@
   },
   "homepage": "https://github.com/leskaa/food-scraper#readme",
   "dependencies": {
+    "actions-on-google": "^2.6.0",
     "axios": "^0.18.0",
-    "cheerio": "^1.0.0-rc.3",
-    "puppeteer": "^1.15.0"
+    "cheerio": "^1.0.0-rc.3"
   }
 }
