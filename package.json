@@ -1,0 +1,24 @@
+{
+  "name": "food-scraper",
+  "version": "1.0.0",
+  "description": "",
+  "main": "foodscraper.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/leskaa/food-scraper.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/leskaa/food-scraper/issues"
+  },
+  "homepage": "https://github.com/leskaa/food-scraper#readme",
+  "dependencies": {
+    "axios": "^0.18.0",
+    "cheerio": "^1.0.0-rc.3",
+    "puppeteer": "^1.15.0"
+  }
+}
