@@ -18,7 +18,11 @@ app.intent('Default Fallback Intent', conv => {
 });
 
 function parsePage(pageUrl, diningCenter) {
-  db.query('INSERT INTO dates (date) VALUES ($1)', [new Date()]);
+  db.query('INSERT INTO dates (date) VALUES ($1)', [new Date()], (err, res) => {
+    if (err) {
+      throw err;
+    }
+  });
 
   axios(pageUrl)
     .then(response => {
@@ -43,7 +47,12 @@ function parsePage(pageUrl, diningCenter) {
             .replace('\u00a0', '');
           db.query(
             'INSERT INTO food_items (food, date, dining_center, meal, menu_category) VALUES ($1, $2,$3, $4, $5',
-            [food, new Date(), diningCenter, currentMeal, currentCategory]
+            [food, new Date(), diningCenter, currentMeal, currentCategory],
+            (err, res) => {
+              if (err) {
+                throw err;
+              }
+            }
           );
         }
       });
