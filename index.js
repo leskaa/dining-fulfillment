@@ -87,7 +87,7 @@ app.intent('Get Menu Intent', async (conv, params) => {
 
   const res = await db.query('SELECT * FROM dates WHERE date = $1', [date]);
 
-  console.log(`date query result: ${res}`);
+  console.log(`date query result: ${res.length}`);
 
   if (res.length < 1) {
     parseDay(date);
