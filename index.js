@@ -85,7 +85,7 @@ app.intent('Get Menu Intent', async (conv, params) => {
   const meal = params.Meal;
   const diningCenter = params.DiningCenter;
 
-  const res = await db.query('SELECT * FROM dates WHERE date = $1', [date]);
+  const { res } = await db.query('SELECT * FROM dates WHERE date = $1', [date]);
 
   console.log(`date query result: ${res.length}`);
 
